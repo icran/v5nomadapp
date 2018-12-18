@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   View,
   Text,
@@ -7,10 +8,11 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
-  StatusBar
+  StatusBar,
+  ActivityIndicator
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-/////
+
 const { width, height } = Dimensions.get("window");
 
 const LogInScreen = props => (
@@ -29,16 +31,26 @@ const LogInScreen = props => (
         style={styles.textInput}
         autoCapitalize={"none"}
         autoCorrect={false}
+        value={props.username}
+        onChangeText={props.changeUsername}
       />
       <TextInput
         placeholder="Password"
         style={styles.textInput}
         autoCapitalize={"none"}
         secureTextEntry={true}
+        value={props.password}
+        onChangeText={props.changePassword}
+        returnKeyType={"send"}
+        onSubmitEditing={props.submit}
       />
-      <TouchableOpacity style={styles.touchable}>
+      <TouchableOpacity style={styles.touchable} onPressOut={props.submit}>
         <View style={styles.button}>
-          <Text style={styles.btnText}>Log In</Text>
+          {props.isSubmitting ? (
+            <ActivityIndicator size="small" color="white" />
+          ) : (
+              <Text style={styles.btnText}>Log In</Text>
+            )}
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.fbContainer}>
@@ -50,6 +62,7 @@ const LogInScreen = props => (
     </View>
   </View>
 );
+
 
 const styles = StyleSheet.create({
   container: {
