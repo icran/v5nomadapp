@@ -18,7 +18,6 @@ const sharedOptions = {
     }
 };
 
-
 export { sharedOptions };
 
 export default sharedRoutes;
