@@ -24,7 +24,8 @@ const RootNavigation = createStackNavigator(
           gesturesEnabled: true
       },
     
-  }
+  },
+
 );
 
 export default createAppContainer(RootNavigation);
