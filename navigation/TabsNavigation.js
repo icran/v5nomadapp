@@ -1,11 +1,12 @@
 import React from "react";
 import { View } from "react-native";
-import { createBottomTabNavigator } from "react-navigation";
+import {createBottomTabNavigator} from "react-navigation";
 import HomeRoute from "../routes/HomeRoute";
 import SearchRoute from "../routes/SearchRoute";
 import NotificationsRoute from "../routes/NotificationsRoute";
 import ProfileRoute from "../routes/ProfileRoute";
 import { Ionicons } from "@expo/vector-icons";
+
 
 
 const TabsNavigation = createBottomTabNavigator(
@@ -34,8 +35,8 @@ const TabsNavigation = createBottomTabNavigator(
         )
       }
     },
-    AddPhoto:{
-      screen:View,
+    AddPhoto: {
+      screen: View,
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <Ionicons
@@ -79,7 +80,8 @@ const TabsNavigation = createBottomTabNavigator(
         backgroundColor: "#FBFBFB",
         height: 45
       },
-      swipeEnabled:true
+      swipeEnabled: true,
+      animationEnabled: true
     }
   }
 );
