@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import {createBottomTabNavigator} from "react-navigation";
+import {createBottomTabNavigator, TabBarBottom} from "react-navigation";
 import HomeRoute from "../routes/HomeRoute";
 import SearchRoute from "../routes/SearchRoute";
 import NotificationsRoute from "../routes/NotificationsRoute";
@@ -37,15 +37,15 @@ const TabsNavigation = createBottomTabNavigator(
     },
     AddPhoto: {
       screen: View,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused }) => (
-          <Ionicons
-            name="ios-add-circle-outline"
-            size={30}
-            color={focused ? "#4dabf7" : "gray"}
-          />
-        )
-      }
+          <Ionicons name={'ios-add-circle-outline'} size={30} color={focused ? "#4dabf7" : "gray"} />
+        ),
+        tabBarOnPress: () => {
+          // Works!
+          navigation.navigate("TakePhoto");
+        },
+      }),
     },
     Notifications: {
       screen: NotificationsRoute,
@@ -73,6 +73,18 @@ const TabsNavigation = createBottomTabNavigator(
     }
   },
   {
+    // tabBarComponent:({jumpToIndex, ...props, navigation}) =>(
+    //   <TabBarBottom 
+    //   {...props}
+    //   jumpToIndex = {index => {
+    //     if(index === 2){
+    //       navigation.navigate("TakePhoto")
+    //     }else{
+    //       jumpToIndex(index)
+    //     }
+    //   }}
+    //   />
+    // ),
     tabBarPosition: "bottom",
     tabBarOptions: {
       showLabel: false,
