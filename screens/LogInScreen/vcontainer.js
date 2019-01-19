@@ -4,6 +4,13 @@ import { Alert } from "react-native";
 import LogInScreen from "./presenter";
 
 class Container extends Component {
+  // static navigationOptions = ({ navigation }) => ({
+  //   title: "Log In"
+  // });
+  // static navigationOptions = {
+  //   title: "LogIn",
+  //   headerStyle: { borderBottomColor: "transparent" }
+  // };
   state = {
     username: "",
     password: "",

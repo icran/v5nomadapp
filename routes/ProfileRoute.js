@@ -1,17 +1,17 @@
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import ProfileScreen from "../screens/ProfileScreen";
 import sharedRoutes, { sharedOptions } from "./sharedRoutes";
 
-const ProfileRoute = StackNavigator(
-    {
-        Profile: {
-            screen: ProfileScreen
-        },
-        ...sharedRoutes
+const ProfileRoute = createStackNavigator(
+  {
+    Profile: {
+      screen: ProfileScreen
     },
-    {
-        ...sharedOptions
-    }
+    ...sharedRoutes
+  },
+  {
+    ...sharedOptions
+  }
 );
 
-export default ProfileRoute;
+export default createAppContainer(ProfileRoute);

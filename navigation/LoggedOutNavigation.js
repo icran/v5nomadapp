@@ -1,13 +1,20 @@
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import LogInScreen from "../screens/LogInScreen";
 
-const LoggedOutNavigation = StackNavigator({
+
+
+const LoggedOutNavigation = createStackNavigator({
     LogIn: {
-        screen: LogInScreen,
+        screen:LogInScreen,
         navigationOptions: {
             header: null
+            
         }
+        
+        
     }
 });
 
-export default LoggedOutNavigation;
+// const LoggedOutNavigation = createAppContainer(sLoggedOutNavigation);
+
+export default createAppContainer(LoggedOutNavigation);

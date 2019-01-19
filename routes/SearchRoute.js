@@ -1,17 +1,17 @@
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import SearchScreen from "../screens/SearchScreen";
 import sharedRoutes, { sharedOptions } from "./sharedRoutes";
 
-const SearchRoute = StackNavigator(
-    {
-        Search: {
-            screen: SearchScreen
-        },
-        ...sharedRoutes
+const SearchRoute = createStackNavigator(
+  {
+    Search: {
+      screen: SearchScreen
     },
-    {
-        ...sharedOptions
-    }
+    ...sharedRoutes
+  },
+  {
+    ...sharedOptions
+  }
 );
 
-export default SearchRoute;
+export default createAppContainer(SearchRoute);

@@ -1,25 +1,30 @@
-import { StackNavigator } from "react-navigation";
+import {createStackNavigator, createAppContainer} from "react-navigation";
 import TakePhotoScreen from "../screens/TakePhotoScreen";
-import TabsNavigation from "./TabsNavigation"
+import TabsNavigation from "./TabsNavigation";
 
-const RootNavigation = StackNavigator(
-    {
-        Tabs: {
-            screen: TabsNavigation,
-            navigationOptions: {
-                header: null
-            }
-        },
-        TakePhoto: {
-            screen: TakePhotoScreen,
-            navigationOptions: {
-                header: null
-            }
-        }
+
+const RootNavigation = createStackNavigator(
+  {
+    Tabs: {
+      screen: TabsNavigation,
+      navigationOptions: {
+        header: null
+      }
     },
-    {
-        mode: "modal"
+    TakePhoto: {
+      screen: TakePhotoScreen,
+      navigationOptions: {
+        header: null
+      }
     }
+  },
+  {
+      mode: "modal",
+      defaultNavigationOptions: {
+          gesturesEnabled: true,
+      },
+    
+  }
 );
 
-export default RootNavigation;
+export default createAppContainer(RootNavigation);
