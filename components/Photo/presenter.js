@@ -1,8 +1,57 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity,Image} from 'react-native';
+import FadeIn from "react-native-fade-in-image";
+const Photo = props => (
+    <View>
+        <TouchableOpacity>
+            <View>
+                <FadeIn>
+                    <Image
+                        source={props.creator.profile_image ? {
+                            uri:props.creator.profile_image
+                        }:
+                            require("../../assets/noPhoto.jpg")
+                    } 
+                    style={{width:50, height:50}}  
+                    />
+                </FadeIn>
 
-const Photo = props => <Text>Photo</Text>
+            </View>
+            <View>
+                <Text>{props.creator.username}</Text>
+                {props.locations && <Text>{props.locations}</Text>}
+            </View>
+        </TouchableOpacity>
+            <FadeIn>
+                <Image source={{uri:props.file}}
+                />
+            </FadeIn>
+            <View>
+                <View>
+                    <Text>{props.creator.username}
+                    <Text>{props.caption}</Text>
+                    </Text>
+                </View>
+                {props.comments.length > 0 && (
+                    <View>
+                        <TouchableOpacity>
+                            {props.comments.length === 1 ? (
+                                <Text>View 1 comment</Text>
+                            ):(
+                                <Text>View all {props.comments.length} comments</Text>
+                            )}
+                        </TouchableOpacity>
+                    </View>
+                )}
+                <Text>{props.natural_time}</Text>
+            </View>
+    </View>    
+)
+
+
+
+
 
 Photo.propTypes = {
     id: PropTypes.number.isRequired,
