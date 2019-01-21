@@ -31,13 +31,12 @@ function logOut() {
   return { type: LOG_OUT };
 }
 
-function setNotifications(notifications){
-  return{
-    type:SET_NOTIFICATIONS,
+function setNotifications(notifications) {
+  return {
+    type: SET_NOTIFICATIONS,
     notifications
-  }
+  };
 }
-
 
 // API Actions
 function login(username, password) {
@@ -104,19 +103,21 @@ function getNotifications() {
       headers: {
         Authorization: `JWT ${token}`
       }
-    }).then(response => {
-      if (response.status === 401) {
-        dispatch(logOut());
-      } else {
-        return response.json();
-      }
-    }).then(json => dispatch(setNotifications(json)))
-  }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(logOut());
+        } else {
+          return response.json();
+        }
+      })
+      .then(json => dispatch(setNotifications(json)));
+  };
 }
 
-function getOwnProfile(){
+function getOwnProfile() {
   return (dispatch, getState) => {
-    const { user: { token, profile:{username}} } = getState();
+    const { user: { token, profile: { username } } } = getState();
     fetch(`${API_URL}/users/${username}/`, {
       headers: {
         Authorization: `JWT ${token}`
@@ -132,8 +133,6 @@ function getOwnProfile(){
       .then(json => dispatch(setUser(json)));
   };
 }
-
-
 
 // Initial State
 
@@ -186,13 +185,14 @@ function applySetUser(state, action) {
   };
 }
 
-function applySetNotifications(){
-  const {notifications} = action;
-  return{
+function applySetNotifications(state, action) {
+  const { notifications } = action;
+  return {
     ...state,
     notifications
-  }
+  };
 }
+
 // Exports
 
 const actionCreators = {
