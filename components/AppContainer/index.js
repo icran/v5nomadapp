@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import AppContainer from "./presenter";
-import {actionCreators as photoActions} from "../../redux/modules/phtos"
-import { actionCreators as userActions } from "../../redux/modules/user"
+import { actionCreators as photoActions } from "../../redux/modules/phtos";
+import { actionCreators as userActions } from "../../redux/modules/user";
 
 const mapStateToProps = (state, ownProps) => {
   const { user } = state;
@@ -11,15 +11,18 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = () => {
-  return{
-    initApp:() => {
-      dispatchEvent(photoActions.getFeed());
-      dispatchEvent(photoActions.getSearch());
-      //getNotifications
-      //getProfile
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    initApp: () => {
+      dispatch(photoActions.getFeed());
+      dispatch(photoActions.getSearch());
+      dispatch(userActions.getNotifications());
+      dispatch(userActions.getOwnProfile());
     }
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps)(AppContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AppContainer);
