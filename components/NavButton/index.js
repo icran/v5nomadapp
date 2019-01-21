@@ -1,38 +1,45 @@
-import React,{Component}from "react";
-import { TouchablewithoutFeedBack, StyleSheet} from "react-native";
-import {IonIcons} from "@expo/vector-icons";
+import React from "react";
+import { PropTypes} from "prop-types";
+import { TouchableWithoutFeedback, StyleSheet, View } from "react-native";
+import { Ionicons} from "@expo/vector-icons";
 
+class NavButton extends React.Component{
 
-
-
-class NavButton extends Component{
   render(){
-    return(
-      <TouchablewithoutFeedBack onPressOut={props.onPress}>
-        <View style={StyleSheet.container}>
-          <IonIcons name={props.iconName} color={"black"} size={30} />
+    return (
+        
+        <TouchableWithoutFeedback onPressOut={this.props.onPress}>
+        <View style={styles.container}>
+        <Ionicons name={this.props.iconName} color={"black"} size={30} />
         </View>
-      </TouchablewithoutFeedBack>
+        </TouchableWithoutFeedback>
+      
     )
-    
+
   }
 }
 
-// NavButton.PropTypes = {
-//   onPress: PropTypes.func.isRequired,
-//   iconName: PropTypes.string.isRequired
+NavButton.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  iconName: PropTypes.string.isRequired
 
-// }
+}
 
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 10
+    // padding을 주면 손가락이 두꺼울때 사용자들이 정교하게 클릭하지 않아도 된다.
+  }
+});
 
-
+export default NavButton; 
 
 // const NavButton = props => (
-//   <TouchablewithoutFeedBack onPressOut={props.onPress}>
-//     <View style={StyleSheet.container}>
-//       <IonIcons name={props.iconName} color={"black"} size={30}  />
+//   <TouchableWithoutFeedBack onPressOut={props.onPress}>
+//     <View style={styles.container}>
+//       <IonIcons name={this.props.iconName} size={30} />
 //     </View>
-//   </TouchablewithoutFeedBack>
+//   </TouchableWithoutFeedBack>
 // );
 
 // NavButton.PropTypes = {
@@ -41,12 +48,3 @@ class NavButton extends Component{
 
 // }
 
-
-const styles = StyleSheet.create({
-  container:{
-    paddingHorizontal:10
-    // padding을 주면 손가락이 두꺼울때 사용자들이 정교하게 클릭하지 않아도 된다.
-  }
-});
-
-export default NavButton; 
