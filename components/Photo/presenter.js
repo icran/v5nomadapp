@@ -10,7 +10,7 @@ Photo.propTypes = {
         profile_image: PropTypes.string,
         username: PropTypes.string.isRequired
     }).isRequired,
-    location: PropTypes.string.isRequired,
+    locations: PropTypes.string.isRequired,
     file: PropTypes.string.isRequired,
     like_count: PropTypes.number.isRequired,
     caption: PropTypes.string.isRequired,
