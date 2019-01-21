@@ -4,22 +4,22 @@ import {Image}  from "react-native";
 import NavButton from "../../components/NavButton";
 
 class Container extends Component{
-    static navigationOptions = ({navigation}) =>({
-        headerTitle:(
-            <Image 
-                source={require("../../assets/logo.png")} 
-                style={{height:35}}
-                resizeMode={"contain"}
-            />
-        ),
-        headerLeft:(
-            <NavButton
-                iconName={"ios-camera"}
-                onPress={() => navigation.navigate("TakePhoto")}
+    // static navigationOptions = ({navigation}) =>({
+    //     headerTitle:(
+    //         <Image 
+    //             source={require("../../assets/logo.png")} 
+    //             style={{height:35}}
+    //             resizeMode={"contain"}
+    //         />
+    //     ),
+    //     headerLeft:(
+    //         <NavButton
+    //             iconName={"ios-camera"}
+    //             onPress={() => navigation.navigate("TakePhoto")}
                 
-            />
-        )
-    })
+    //         />
+    //     )
+    // })
 
     
     render(){

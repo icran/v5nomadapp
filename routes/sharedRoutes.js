@@ -1,7 +1,7 @@
 import React from "react";
 import LikesScreen from "../screens/LikesScreen";
 import CommentsScreen from "../screens/CommentsScreen";
-// import {NavButton} from "../components/NavButton"
+import { NavButton } from "../components/NavButton"
 
 const sharedRoutes = {
   Likes: {
@@ -13,31 +13,25 @@ const sharedRoutes = {
 };
 
 
- const sharedOptions = {
-  // // //  navigationOptions: {
-  // //   //  headerLeft: props => <NavButton iconName={"ios-arrow-back"} {...props} />,
-  // //   headerStyle:{
-  // //     backgroundColor:"red"
-  // //   }
-  //  }
-  //  navigationOptions: (
-  //    props => (
-  //      {
-  //        headerLeft: () => (
-  //          <NavButton
-  //            {...props}
-  //            iconName={"ios-arrow-down"}
-  //            onPress={() => console.log("pressed")}
-  //          />
-  //        )
-  //      }
+const sharedOptions = {
+     navigationOptions: {
+          headerLeft: props => (
+            <NavButton
+              {...props}
+              iconName={"ios-arrow-back"}
+            />
+          )
 
-  //    )),
-  //    headerStyle:{
-  //      backgroundColor:"red"
-  //    }
+        },
+        headerStyle:{
+          backgroundColor:"red"
+        }
 
-  };
+      }
+
+     
+   
+ 
 
 export { sharedOptions };
 
