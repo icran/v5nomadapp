@@ -12,7 +12,7 @@ const PhotoActions = props => (
                     <Ionicons
                         name={props.isLiked ? "md-heart" : "md-heart-empty"}
                         size={30}
-                        color={props.isLiked ? "red" : "black"}
+                        color={props.isLiked ? "#eb4b59" : "black"}
                     />
                 </View>
             </TouchableOpacity>
@@ -20,12 +20,7 @@ const PhotoActions = props => (
                 onPressOut={() => props.navigation.navigate("Comments")}
             >
                 <View style={styles.action}>
-                    <Ionicons 
-                    name={"ios-text"} 
-                    size={30} 
-                    color={"black"} 
-                     
-                    />
+                    <Ionicons name={"ios-text"} size={30} color={"black"} />
                 </View>
             </TouchableOpacity>
         </View>
@@ -58,7 +53,7 @@ const styles = StyleSheet.create({
 PhotoActions.propTypes = {
     isLiked: PropTypes.bool.isRequired,
     likeCount: PropTypes.number.isRequired,
-    handlePress:PropTypes.func.isRequired,
+    handlePress: PropTypes.func.isRequired
 };
 
 export default withNavigation(PhotoActions);
