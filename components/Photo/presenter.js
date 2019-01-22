@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
         flex: 1
     },
     avatar: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
+        width: 50,
+        height: 50,
+        borderRadius: 25,
         marginRight: 10
     },
     author: {
