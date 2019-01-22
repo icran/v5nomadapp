@@ -15,65 +15,67 @@ import { withNavigation } from "react-navigation";
 const { width, height } = Dimensions.get("window");
 
 const Photo = props => (
-    <View style={styles.photo}>
-        <TouchableOpacity>
-            <View style={styles.header}>
-                <FadeIn>
-                    <Image
-                        source={
-                            props.creator.profile_image
-                                ? {
-                                    uri: props.creator.profile_image
-                                }
-                                : require("../../assets/noPhoto.jpg")
-                        }
-                        style={styles.avatar}
-                    />
-                </FadeIn>
-                <View>
-                    <Text style={styles.author}>{props.creator.username}</Text>
-                    {props.locations && (
-                        <Text style={styles.locations}>{props.locations}</Text>
-                    )}
-                </View>
-            </View>
-        </TouchableOpacity>
+  <View style={styles.photo}>
+    <TouchableOpacity>
+      <View style={styles.header}>
         <FadeIn>
-            <Image
-                source={{ uri: props.file }}
-                style={{ width, height: props.is_vertical ? 600 : 300 }}
-            />
+          <Image
+            source={
+              props.creator.profile_image
+                ? {
+                    uri: props.creator.profile_image
+                  }
+                : require("../../assets/noPhoto.jpg")
+            }
+            style={styles.avatar}
+          />
         </FadeIn>
-        <View style={styles.photoMeta}>
-            <PhotoActions
-                isLiked={props.is_liked}
-                likeCount={props.like_count}
-                handlePress={props.dispatchLike}
-            />
-            <View style={styles.comment}>
-                <Text style={styles.commentAuthor}>
-                    {props.creator.username}{" "}
-                    <Text style={styles.message}>{props.caption}</Text>
-                </Text>
-            </View>
-            {props.comments.length > 0 && (
-                <TouchableOpacity
-                    onPressOut={() => props.navigation.navigate("Comments")}
-                >
-                    <View style={styles.commentsLink}>
-                        {props.comments.length === 1 ? (
-                            <Text style={styles.linkText}>View 1 comment</Text>
-                        ) : (
-                                <Text style={styles.linkText}>
-                                    View all {props.comments.length} comments
-              </Text>
-                            )}
-                    </View>
-                </TouchableOpacity>
-            )}
-            <Text style={styles.dateText}>{props.natural_time.toUpperCase()}</Text>
+        <View>
+          <Text style={styles.author}>{props.creator.username}</Text>
+          {props.locations && (
+            <Text style={styles.locations}>{props.locations}</Text>
+          )}
         </View>
+      </View>
+    </TouchableOpacity>
+    <FadeIn>
+      <Image
+        source={{ uri: props.file }}
+        style={{ width, height: props.is_vertical ? 600 : 300 }}
+      />
+    </FadeIn>
+    <View style={styles.photoMeta}>
+      <PhotoActions
+        isLiked={props.isLiked}
+        // 변경완료 prop에서오는 is_Liked 가 아닌 state 에서 오는 isLiked로
+        likeCount={props.likeCount}
+        // likeCount 또한 변경 완료. 
+        handlePress={props.handlePress}
+      />
+      <View style={styles.comment}>
+        <Text style={styles.commentAuthor}>
+          {props.creator.username}{" "}
+          <Text style={styles.message}>{props.caption}</Text>
+        </Text>
+      </View>
+      {props.comments.length > 0 && (
+        <TouchableOpacity
+          onPressOut={() => props.navigation.navigate("Comments")}
+        >
+          <View style={styles.commentsLink}>
+            {props.comments.length === 1 ? (
+              <Text style={styles.linkText}>View 1 comment</Text>
+            ) : (
+              <Text style={styles.linkText}>
+                View all {props.comments.length} comments
+              </Text>
+            )}
+          </View>
+        </TouchableOpacity>
+      )}
+      <Text style={styles.dateText}>{props.natural_time.toUpperCase()}</Text>
     </View>
+  </View>
 );
 
 const styles = StyleSheet.create({
@@ -155,7 +157,8 @@ Photo.propTypes = {
     ).isRequired,
     natural_time: PropTypes.string.isRequired,
     is_liked: PropTypes.bool.isRequired,
-    is_vertical: PropTypes.bool.isRequired
+    is_vertical: PropTypes.bool.isRequired,
+    handlePress:PropTypes.func.isRequired,
 };
 
 export default withNavigation(Photo);
