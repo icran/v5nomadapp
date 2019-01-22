@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import FadeIn from "react-native-fade-in-image";
 import PhotoActions from "../PhotoActions";
-import {withNavigation} from "react-navigation";
+import { withNavigation } from "react-navigation";
 
 const { width, height } = Dimensions.get("window");
 
@@ -45,15 +45,21 @@ const Photo = props => (
             />
         </FadeIn>
         <View style={styles.photoMeta}>
-        <PhotoActions isLiked={props.isLiked} likeCount={props.like_count} />
-            <View style={styles.comments}>
+            <PhotoActions
+                isLiked={props.is_liked}
+                likeCount={props.like_count}
+                handlePress={props.dispatchLike}
+            />
+            <View style={styles.comment}>
                 <Text style={styles.commentAuthor}>
                     {props.creator.username}{" "}
                     <Text style={styles.message}>{props.caption}</Text>
                 </Text>
             </View>
             {props.comments.length > 0 && (
-                <TouchableOpacity onPressOut={()=>props.navigation.navigate("Comments")}>
+                <TouchableOpacity
+                    onPressOut={() => props.navigation.navigate("Comments")}
+                >
                     <View style={styles.commentsLink}>
                         {props.comments.length === 1 ? (
                             <Text style={styles.linkText}>View 1 comment</Text>
@@ -85,9 +91,9 @@ const styles = StyleSheet.create({
         flex: 1
     },
     avatar: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
         marginRight: 10
     },
     author: {
@@ -95,7 +101,7 @@ const styles = StyleSheet.create({
         marginBottom: 3,
         fontSize: 15
     },
-    location: {
+    locations: {
         fontSize: 13
     },
     photoMeta: {
@@ -114,7 +120,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     commentsLink: {
-        marginTop: 10
+        marginTop: 5
     },
     linkText: {
         fontSize: 15,
@@ -126,10 +132,6 @@ const styles = StyleSheet.create({
         marginTop: 10
     }
 });
-
-
-
-
 
 Photo.propTypes = {
     id: PropTypes.number.isRequired,
@@ -153,9 +155,7 @@ Photo.propTypes = {
     ).isRequired,
     natural_time: PropTypes.string.isRequired,
     is_liked: PropTypes.bool.isRequired,
-    is_vertical: PropTypes.bool.isRequired,
+    is_vertical: PropTypes.bool.isRequired
 };
-
-
 
 export default withNavigation(Photo);
