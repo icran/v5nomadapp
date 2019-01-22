@@ -40,12 +40,21 @@ const HomeRoute = createStackNavigator(
             {...props}
             iconName={"ios-arrow-back"}
           />
-        )
- 
+        ),
+        headerTitle:"Likes"
       }
     },
     Comments: {
-      screen: CommentsScreen
+      screen: CommentsScreen,
+      navigationOptions:{
+        headerLeft: props => (
+          <NavButton
+            {...props}
+            iconName={"ios-arrow-back"}
+          />
+        ),
+        headerTitle:"Comments"
+      }
     }
   },
  
