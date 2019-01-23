@@ -1,7 +1,5 @@
-import React from "react";
-import { View, Text } from "react-native";
+import {connect} from "react-redux"
+import Container from "./container"
 
 
-const SearchScreen = props => <Text>Search</Text>;
-
-export default SearchScreen;
+export default connect()(Container);
