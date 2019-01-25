@@ -4,6 +4,8 @@ import FeedScreen from "../screens/FeedScreen";
 import sharedRoutes,{sharedOptions} from "./sharedRoutes";
 import LikesScreen from "../screens/LikesScreen";
 import CommentsScreen from "../screens/CommentsScreen";
+import ProfileDetailScreen from "../screens/ProfileDetailScreen"
+import PhotoScreen from "../screens/PhotoScreen"
 // import { IoniIcons } from "@expo/vector-icons";
 import { Image } from "react-native";
 import NavButton from "../components/NavButton"
@@ -55,7 +57,26 @@ const HomeRoute = createStackNavigator(
         ),
         headerTitle:"Comments"
       }
+    },
+    ProfileDetail: {
+      screen: ProfileDetailScreen,
+      navigationOptions: {
+        headerLeft: props => (
+          <NavButton
+            {...props}
+            iconName={"ios-arrow-back"}
+          />
+        ),
+        headerTitle: "Comments"
+      }
+    },
+    Photo: {
+      screen: PhotoScreen,
+      navigationOptions: {
+        headerTitle: "Photo"
+      }
     }
+
   },
  
 );
