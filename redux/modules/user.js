@@ -98,7 +98,9 @@ function facebookLogin() {
 
 function getNotifications() {
   return (dispatch, getState) => {
-    const { user: { token } } = getState();
+    const {
+      user: { token }
+    } = getState();
     fetch(`${API_URL}/notifications/`, {
       headers: {
         Authorization: `JWT ${token}`
@@ -117,7 +119,12 @@ function getNotifications() {
 
 function getOwnProfile() {
   return (dispatch, getState) => {
-    const { user: { token, profile: { username } } } = getState();
+    const {
+      user: {
+        token,
+        profile: { username }
+      }
+    } = getState();
     fetch(`${API_URL}/users/${username}/`, {
       headers: {
         Authorization: `JWT ${token}`
@@ -131,6 +138,50 @@ function getOwnProfile() {
         }
       })
       .then(json => dispatch(setUser(json)));
+  };
+}
+
+function followUser(userId) {
+  return (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    return fetch(`${API_URL}/users/${userId}/follow/`, {
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(logOut());
+      } else if (response.ok) {
+        return true;
+      } else if (!response.ok) {
+        return false;
+      }
+    });
+  };
+}
+
+function unfollowUser(userId) {
+  return (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    return fetch(`${API_URL}/users/${userId}/unfollow/`, {
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(logOut());
+      } else if (response.ok) {
+        return true;
+      } else if (!response.ok) {
+        return false;
+      }
+    });
   };
 }
 
@@ -200,7 +251,9 @@ const actionCreators = {
   facebookLogin,
   logOut,
   getNotifications,
-  getOwnProfile
+  getOwnProfile,
+  followUser,
+  unfollowUser
 };
 
 export { actionCreators };

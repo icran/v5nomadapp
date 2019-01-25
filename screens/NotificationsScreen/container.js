@@ -19,6 +19,7 @@ class Container extends Component {
     };
 
     render() {
+        console.log(this.props)
         return (
             <NotificationsScreen
                 {...this.props}
