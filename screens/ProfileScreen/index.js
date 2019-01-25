@@ -1,7 +1,20 @@
-import React from "react";
-import { View, Text } from "react-native";
+import { connect } from "react-redux";
+import { actionCreators as userActions } from "../../redux/modules/user";
+import Container from "./container";
 
+const mapStateToProps = (state, ownProps) => {
+    const { user: { profile } } = state;
+    return {
+        profile
+    };
+};
 
-const ProfileScreen = props => <Text>ProfileScreen</Text>;
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getOwnProfile: () => {
+            dispatch(userActions.getOwnProfile());
+        }
+    };
+};
 
-export default ProfileScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

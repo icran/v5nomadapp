@@ -24,7 +24,7 @@ const Photo = props => (
       }}>
       <View style={styles.header}>
         <FadeIn>
-          <Image
+          <Image 
             source={
               props.creator.profile_image
                 ? {

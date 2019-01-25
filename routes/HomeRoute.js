@@ -60,15 +60,15 @@ const HomeRoute = createStackNavigator(
     },
     ProfileDetail: {
       screen: ProfileDetailScreen,
-      navigationOptions: {
+      navigationOptions: props => ({
         headerLeft: props => (
           <NavButton
             {...props}
             iconName={"ios-arrow-back"}
           />
         ),
-        headerTitle: "Comments"
-      }
+        headerTitle: props.screenProps.username
+      })
     },
     Photo: {
       screen: PhotoScreen,
