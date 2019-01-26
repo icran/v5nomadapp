@@ -8,16 +8,22 @@ import LibraryRoute from "../routes/LibraryRoute";
 const AddPhotoNavigation = createMaterialTopTabNavigator(
   {
     Camera: {
-      screen: PhotoRoute,
+      screen: PhotoRoute
     },
     Library: {
       screen: LibraryRoute
     }
   },
   {
+    tabBarOptions: {
+      style: {
+        backgroundColor: "gray",
+      },
+      
+    }
+  },
 
-
-  }
+  {}
   // const AddPhotoNavigation = createBottomTabNavigator(
   //     {
   //         Camera:{

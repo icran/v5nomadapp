@@ -14,13 +14,8 @@ const PhotoRoute = createStackNavigator(
     }
     
   },
-   {
-        NavigationOptions: {
-            headerStyle: {
-                height:200
-            }
-        },
-    }
+
+    
 );
 
 
