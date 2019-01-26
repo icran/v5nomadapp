@@ -78,7 +78,7 @@ const Profile = props => (
             ) : (
                 <TouchableOpacity>
                   <View style={[styles.button, { backgroundColor: "#3e99ee" }]}>
-                    <Text style={[styles.text, { color: "black" }]}>
+                    <Text style={[styles.text, { color: "white" }]}>
                       {props.profileObject.following ? "Unfollow" : "Follow"}
                     </Text>
                   </View>

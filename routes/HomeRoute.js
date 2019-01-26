@@ -67,7 +67,10 @@ const HomeRoute = createStackNavigator(
             iconName={"ios-arrow-back"}
           />
         ),
-        headerTitle: props.screenProps.username
+        // headerTitle: props.screenProps.username
+        headerTitle: props.navigation.state.params.user.username
+        // 강의 4-43 에서 4-44 에서 navigationOptions 에 headerTitle
+        // 부분에 오류가 있어 profileDetailscreen 에서 수정않고 이곳에서 직접 수정하였다. 
       })
     },
     Photo: {
