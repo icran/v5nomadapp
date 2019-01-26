@@ -2,7 +2,7 @@
 
 import { API_URL, FB_APP_ID } from "../../constants";
 import { AsyncStorage } from "react-native";
-import { Facebook } from "expo";
+import { Permissions, Notifications, Facebook } from "expo";
 
 // Actions
 
@@ -144,9 +144,7 @@ function getOwnProfile() {
 function getProfile(username) {
   return (dispatch, getState) => {
     const {
-      user: {
-        token
-      }
+      user: { token }
     } = getState();
     return fetch(`${API_URL}/users/${username}/`, {
       headers: {
@@ -160,9 +158,7 @@ function getProfile(username) {
           return response.json();
         }
       })
-      .then(json => {
-        return json
-      });
+      .then(json => json);
   };
 }
 
@@ -206,6 +202,42 @@ function unfollowUser(userId) {
       } else if (!response.ok) {
         return false;
       }
+    });
+  };
+}
+
+function registerForPush() {
+  return async (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    const { status: existingStatus } = await Permissions.getAsync(
+      Permissions.NOTIFICATIONS
+    );
+    let finalStatus = existingStatus;
+
+    if (existingStatus !== "granted") {
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+
+    if (finalStatus === "denied") {
+      return;
+    }
+
+    let pushToken = await Notifications.getExpoPushTokenAsync();
+
+    console.log(pushToken);
+
+    return fetch(`${API_URL}/users/push/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${token}`
+      },
+      body: JSON.stringify({
+        token: pushToken
+      })
     });
   };
 }
@@ -279,7 +311,8 @@ const actionCreators = {
   getOwnProfile,
   followUser,
   unfollowUser,
-  getProfile
+  getProfile,
+  registerForPush
 };
 
 export { actionCreators };
