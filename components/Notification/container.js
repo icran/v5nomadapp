@@ -13,6 +13,9 @@ class Container extends Component {
         followUser: PropTypes.func.isRequired,
         unfollowUser: PropTypes.func.isRequired
     };
+    static defaultProps = {
+        notifications:[]
+    }
     render() {
         console.log(this.props)
         return (
