@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
     StyleSheet,
     Image,
-    CameraRoll
+    CameraRoll,
+    StatusBar
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Camera, Permissions } from "expo";
@@ -42,6 +43,7 @@ class CameraScreen extends Component {
         } else {
             return (
                 <View style={styles.container}>
+                    <StatusBar hidden={true} />
                     {pictureTaken ? (
                         <View style={{ flex: 2 }}>
                             <FitImage source={{ uri: picture }} style={{ flex: 1 }} />
@@ -86,9 +88,24 @@ class CameraScreen extends Component {
                             </Camera>
                         )}
                     <View style={styles.btnContainer}>
-                        <TouchableOpacity onPressOut={this._takePhoto}>
-                            <View style={styles.btn} />
-                        </TouchableOpacity>
+                        {pictureTaken ? (
+                            <View style={styles.photoActions}>
+                                <TouchableOpacity onPressOut={this._rejectPhoto}>
+                                    <MaterialIcons name={"cancel"} size={60} color="black" />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPressOut={this._approvePhoto}>
+                                    <MaterialIcons
+                                        name={"check-circle"}
+                                        size={60}
+                                        color="black"
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        ) : (
+                                <TouchableOpacity onPressOut={this._takePhoto}>
+                                    <View style={styles.btn} />
+                                </TouchableOpacity>
+                            )}
                     </View>
                 </View>
             );
@@ -126,6 +143,22 @@ class CameraScreen extends Component {
             }
         }
     };
+    _rejectPhoto = () => {
+        this.setState({
+            picture: null,
+            pictureTaken: false
+        });
+    };
+    _approvePhoto = async () => {
+        const { picture } = this.state;
+        const { navigation: { navigate } } = this.props;
+        const saveResult = await CameraRoll.saveToCameraRoll(picture, "photo");
+        navigate("UploadPhoto", { url: picture });
+        this.setState({
+            picture: null,
+            pictureTaken: false
+        });
+    };
 }
 
 const styles = StyleSheet.create({
@@ -157,6 +190,13 @@ const styles = StyleSheet.create({
         height: 40,
         width: 40,
         margin: 10
+    },
+    photoActions: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        flex: 1,
+        alignItems: "center",
+        width: 250
     }
 });
 

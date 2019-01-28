@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import FadeIn from "react-native-fade-in-image";
 import { withNavigation } from "react-navigation";
+import { API_URL } from '../../constants';
 
 const { width, height } = Dimensions.get("window");
 
@@ -25,9 +26,9 @@ const Notification = props => (
             <FadeIn>
                 <Image
                     source={
-                        props.creator.profile_image
+                        `${API_URL}`+props.creator.profile_image
                             ? {
-                                uri: props.creator.profile_image
+                                uri: `${API_URL}`+props.creator.profile_image
                             }
                             : require("../../assets/noPhoto.jpg")
                     }
